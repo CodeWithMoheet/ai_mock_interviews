@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
-// import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
+import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
 const InterviewCard = async ({
     interviewId,
@@ -17,12 +17,12 @@ const InterviewCard = async ({
     createdAt,
 }: InterviewCardProps) => {
     const feedback = null as Feedback | null;
-    // userId && interviewId
-    // //   ? await getFeedbackByInterviewId({
-    // //       interviewId,
-    // //       userId,
-    // //     })
-    //   : null;
+    userId && interviewId
+      ? await getFeedbackByInterviewId({
+          interviewId,
+          userId,
+        })
+      : null;
 
     // intervie mix in this case we use 
     const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
