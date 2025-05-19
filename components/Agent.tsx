@@ -61,13 +61,22 @@ const Agent = ({
       setIsSpeaking(false);
     };
 
-   const onError = (error: Error) => {
+  const onError = (error: Error) => {
+  console.error("Vapi error:", error.message);
+
   if (error.message.includes("ejection")) {
-    console.log("Call ended normally (ejection message from Vapi)");
+    console.log("Call ended due to ejection (normal or early termination).");
+
+    // Optional: Show a message to the user or redirect
+    alert("The interview has ended.");
+
+    setCallStatus(CallStatus.FINISHED);
   } else {
-    console.error("Unexpected error:", error);
+    alert("Something went wrong. Please try again.");
+    setCallStatus(CallStatus.FINISHED);
   }
 };
+
 
 
     vapi.on("call-start", onCallStart);
